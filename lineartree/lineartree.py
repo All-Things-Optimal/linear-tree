@@ -220,6 +220,8 @@ class LinearTreeRegressor(_LinearTree, RegressorMixin):
             multitarget regression.
             The predicted values.
         """
+        if not hasattr(self, 'estimator'):
+            self.estimator = self.base_estimator
         check_is_fitted(self, attributes='_nodes')
 
         X = validate_data(
@@ -465,6 +467,9 @@ class LinearTreeClassifier(_LinearTree, ClassifierMixin):
         pred : ndarray of shape (n_samples, )
             The predicted classes.
         """
+        if not hasattr(self, 'estimator'):
+            self.estimator = self.base_estimator
+
         check_is_fitted(self, attributes='_nodes')
 
         X = validate_data(
@@ -509,6 +514,9 @@ class LinearTreeClassifier(_LinearTree, ClassifierMixin):
             classes corresponds to that in the attribute :term:`classes_`.
         """
         check_is_fitted(self, attributes='_nodes')
+
+        if not hasattr(self, 'estimator'):
+            self.estimator = self.base_estimator
 
         X = validate_data(
             self.estimator,
@@ -1317,6 +1325,9 @@ class LinearForestRegressor(_LinearForest, RegressorMixin):
             multitarget regression.
             The predicted values.
         """
+        if not hasattr(self, 'estimator'):
+            self.estimator = self.base_estimator
+
         check_is_fitted(self, attributes='estimator_')
 
         X = validate_data(
@@ -1603,6 +1614,9 @@ class LinearForestClassifier(_LinearForest, ClassifierMixin):
             Confidence score for self.classes_[1] where >0 means this
             class would be predicted.
         """
+        if not hasattr(self, 'estimator'):
+            self.estimator = self.base_estimator
+            
         check_is_fitted(self, attributes='estimator_')
 
         X = validate_data(
