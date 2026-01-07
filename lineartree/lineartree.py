@@ -791,6 +791,8 @@ class LinearBoostRegressor(_LinearBoosting, RegressorMixin):
             multitarget regression.
             The predicted values.
         """
+        if not hasattr(self, 'estimator_'):
+            self.estimator_ = self.base_estimator_
         check_is_fitted(self, attributes='estimator_')
 
         return self.estimator_.predict(self.transform(X))
@@ -1020,6 +1022,8 @@ class LinearBoostClassifier(_LinearBoosting, ClassifierMixin):
         pred : ndarray of shape (n_samples, )
             The predicted classes.
         """
+        if not hasattr(self, 'estimator_'):
+            self.estimator_ = self.base_estimator_
         check_is_fitted(self, attributes='estimator_')
 
         return self.estimator_.predict(self.transform(X))
@@ -1614,9 +1618,9 @@ class LinearForestClassifier(_LinearForest, ClassifierMixin):
             Confidence score for self.classes_[1] where >0 means this
             class would be predicted.
         """
-        if not hasattr(self, 'estimator'):
-            self.estimator = self.base_estimator
-            
+        if not hasattr(self, 'estimator_'):
+            self.estimator_ = self.base_estimator_
+
         check_is_fitted(self, attributes='estimator_')
 
         X = validate_data(
